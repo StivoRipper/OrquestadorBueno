@@ -8,9 +8,6 @@ const { createSession } = require("../controllers/payment.controller.js")
 const { createOrderMP } = require("../controllers/payment.controller.js")
 const { receiveWebhook } = require("../controllers/payment.controller.js")
 
-
-
-
 router.post("/create-checkout-session", createSession);
 router.get("/succes", (req, res) => res.redirect("/payed.html"));
 router.get("/cancel", (req, res) => res.redirect("/"));
