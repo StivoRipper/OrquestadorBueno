@@ -8,10 +8,17 @@ const stripe = require("stripe")(
 ); // Add your Secret Key Here
 const mercadopago = require("mercadopago");
 const app = express();
+const cors = require("cors");
+
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(
+  cors({
+    origin: "http://localhost:4000",
+  })
+);
 
 app.use(express.static(path.resolve("src/public")));
 
@@ -162,6 +169,9 @@ app.post("/mercadopago-checkout-pro", async (req, res) => {
       failure: "http://localhost:4000/cancel.html",
       pending: "http://localhost:4000/payed.html",
     },
+    auto_return: "approved",
+    notification_url:
+      "https://f3a5-2806-2a0-c06-8499-30a2-a0c3-ced0-9162.ngrok-free.app/webhook",
   };
 
   try {
@@ -172,6 +182,32 @@ app.post("/mercadopago-checkout-pro", async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).send(err);
+  }
+});
+
+app.post("/webhook", async function (req, res) {
+  const paymentId = req.query.id;
+
+  try {
+    const response = await fetch(
+      `https://api.mercadopago.com/v1/payments/${paymentId}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${mercadopago.configure.access_token}`,
+        },
+      }
+    );
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+    }
+
+    res.sendStatus(200);
+  } catch (error) {
+    console.error("Error: ", error);
+    res.sendStatus(500);
   }
 });
 
