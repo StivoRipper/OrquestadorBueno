@@ -49,6 +49,7 @@
   payBtnMercadoPago.addEventListener("click", () => {
     fetch("/mercadopago-checkout-pro", {
       method: "post",
+      mode: "no-cors",
       headers: new Headers({ "Content-Type": "application/Json" }),
       body: JSON.stringify({
         items: JSON.parse(localStorage.getItem("cartItems")),
