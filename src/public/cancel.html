@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pago Rechazado</title>
@@ -43,24 +44,46 @@
       });
 
       document.addEventListener("DOMContentLoaded", (event) => {
-  const payBtnMercadoPago = document.querySelector(".btn-buy-mercadopago");
+        const payBtnMercadoPago = document.querySelector(
+          ".btn-buy-mercadopago"
+        );
 
-  payBtnMercadoPago.addEventListener("click", () => {
-    fetch("/mercadopago-checkout-pro", {
-      method: "post",
-      headers: new Headers({ "Content-Type": "application/Json" }),
-      body: JSON.stringify({
-        items: JSON.parse(localStorage.getItem("cartItems")),
-      }),
-    })
-      .then(response => response.json())
-      .then(data => {
-        // Redirigir al usuario a la URL de MercadoPago
-        window.location.href = data.init_point;
-      })
-      .catch((err) => console.log(err));
-  });
-});
+        if (payBtnMercadoPago) {
+          payBtnMercadoPago.addEventListener("click", () => {
+            const cartItems = JSON.parse(localStorage.getItem("cartItems"));
+
+            if (!cartItems || cartItems.length === 0) {
+              console.error("No hay artículos en el carrito.");
+              return;
+            }
+
+            fetch("/mercadopago-checkout-pro", {
+              method: "POST",
+              headers: new Headers({ "Content-Type": "application/json" }),
+              body: JSON.stringify({ items: cartItems }),
+            })
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error("Error en la respuesta del servidor");
+                }
+                return response.json();
+              })
+              .then((data) => {
+                if (data.init_point) {
+                  window.location.href = data.init_point; // Redirige al usuario a la URL de MercadoPago
+                } else {
+                  console.error("init_point no encontrado en la respuesta");
+                }
+              })
+              .catch((err) => {
+                console.error("Error:", err);
+                alert(
+                  "Hubo un problema al procesar el pago. Intenta nuevamente."
+                );
+              });
+          });
+        }
+      });
     </script>
   </body>
 </html>
