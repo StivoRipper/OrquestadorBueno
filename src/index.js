@@ -5,7 +5,8 @@ const morgan = require("morgan");
 const path = require("path");
 const stripe = require("stripe")(
   "sk_test_51O6QsWJGdC53RqzMKrr5WmubTo6oAGEk05LQN2PgQRZCne8XDI1FpeWbhApsHkEG2MgCHRpEuvPxPpaPUmlnakrX00mgHBPWpo"
-); // Add your Secret Key Here
+);
+// Add your Secret Key Here
 const mercadopago = require("mercadopago");
 const app = express();
 const cors = require("cors");
@@ -14,7 +15,15 @@ app.use(express.json());
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors());
+app.use(cors({ origin: true, credentials: true  }));
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+  res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+  next();
+});
 
 app.use(express.static(path.resolve("src/public")));
 

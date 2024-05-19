@@ -6,21 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pago Rechazado</title>
     <link rel="stylesheet" href="styles.css" />
-    <script src="https://sdk.mercadopago.com/js/v2"></script>
   </head>
   <body>
     <div class="sc-container">
       <h1>¡Tu compra no se realizo!</h1>
       <img src="images/error.png" alt="" />
+      <a href="http://localhost:4000" class="sc-btn"
+        >Volver a la Pagina Principal</a>
       <button class="btn-buy-paypal">
         ¿Te gustaría intentarlo con PayPal?
       </button>
+      <a href= >
       <button class="btn-buy-mercadopago">
         ¿Te gustaría intentarlo con MercadoPago?
       </button>
-      <a href="http://localhost:4000" class="sc-btn"
-        >Volver a la Pagina Principal</a
-      >
+      </a>
     </div>
     <script>
       document.addEventListener("DOMContentLoaded", (event) => {
