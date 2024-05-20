@@ -159,9 +159,9 @@ app.post("/paypal-checkout", async (req, res) => {
   }
 });
 //----------------------------------------------------------------------------Mercado Pago ------------------------------------------------------------//
-//TESTUSER1621058052 oayUoPfmSO     Mastercard   ,  123 , 11/25
-mercadopago.configurations.setAccessToken(
-  "TEST-1567338789016917-102921-70531cc6c0e43143b1e79d88a6be3ed6-1529720876"
+mercadopago.configure(
+  {access_token :
+    "TEST-2600371334349614-051923-ee16dd83d62e92b61b1f3d62b2f4b73c-1821783102"}
 );
 app.post("/mercadopago-checkout-pro", async (req, res) => {
   let preference = {
@@ -178,7 +178,8 @@ app.post("/mercadopago-checkout-pro", async (req, res) => {
       pending: "http://localhost:4000/payed.html",
     },
     auto_return: "approved",
-    notification_url: "https://e1dc-148-204-216-241.ngrok-free.app/webhook",
+    notification_url:
+      "https://b41b-2806-106e-5-59e5-d1f0-4536-2fbd-e8b9.ngrok-free.app/webhook",
   };
 
   try {
