@@ -312,50 +312,17 @@ header{
     font-weight: 500;
 }
 
-/* haciendo responsiva */
-@media (max-width: 1080px){
-    .nav {
-        padding: 14px 0;
-    }
-    section{
-        padding: 3rem 0 2rem;
-    }
-    .container{
-        margin: 0 auto;
-        width: 90%;
-    }
-    .shop{
-        margin-top: 2rem !important;
-    }
-    .sc-container h1{
-        font-size: 1.5rem;
-    }
+.button-container {
+    display: flex;
+    gap: 10px; /* Espacio entre los botones, ajusta según sea necesario */
 }
 
-@media (max-width: 400px){
-    .nav {
-        padding: 12px 0;
-    }
-    .logo{
-        font-size: 1rem;
-    }
-    .cart{
-        width: 320px;
-    }
-    .sc-container h1{
-        font-size: 1.1rem;
-    }
-    .sc-container p{
-        width: 90%;
-        font-size: 0.9rem;
-    }
-}
-
-@media (max-width: 360px){
-    .shop{
-        margin-top: 1rem !important;
-    }
-    .cart{
-        width: 100%;
-    }
+.btn-buy-paypal,
+.btn-buy-mercadopago {
+    padding: 12px 20px;
+    border-radius: 2rem;
+    background: var(--text-color);
+    color: var(--bg-color);
+    font-size: 1rem;
+    font-weight: 500;
 }
