@@ -179,7 +179,7 @@ app.post("/mercadopago-checkout-pro", async (req, res) => {
     },
     auto_return: "approved",
     notification_url:
-      "https://7844-2806-106e-5-59e5-d1f0-4536-2fbd-e8b9.ngrok-free.app/webhook",
+      "https://e645-2806-106e-5-59e5-9d95-6867-6fcf-f2f9.ngrok-free.app/webhook",
   };
 
   try {
