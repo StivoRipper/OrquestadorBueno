@@ -133,7 +133,7 @@ app.post("/paypal-checkout", async (req, res) => {
       ],
       application_context: {
         return_url: `http://localhost:4000/capture-order`,
-        cancel_url: "http://localhost:4000/cancel-payment",
+        cancel_url: "http://localhost:4000/cancel.html",
       },
     };
 
